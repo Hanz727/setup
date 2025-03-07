@@ -55,15 +55,24 @@ git clone https://github.com/Hanz727/nvim-cfg.git ~/.config/nvim
 git clone --depth 1 https://github.com/wbthomason/packer.nvim \
   ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-CD_CONFIG="set completion-ignore-case on\nset show-all-if-ambiguous on"
-
-# Check if the settings already exist in ~/.inputrc
-if ! grep -q "completion-ignore-case" ~/.inputrc 2>/dev/null; then
-    echo -e "\n# Enable case-insensitive tab completion" >> ~/.inputrc
-    echo -e "$CD_CONFIG" >> ~/.inputrc
-    echo "Updated ~/.inputrc to enable case-insensitive cd tab completion."
+### 1. Enable Case-Insensitive Tab Completion for `cd`
+INPUTRC="$HOME/.inputrc"
+if ! grep -q "completion-ignore-case" "$INPUTRC" 2>/dev/null; then
+    echo -e "\n# Enable case-insensitive tab completion" >> "$INPUTRC"
+    echo "set completion-ignore-case on" >> "$INPUTRC"
+    echo "set show-all-if-ambiguous on" >> "$INPUTRC"
+    echo "Case-insensitive tab completion enabled."
 else
     echo "Case-insensitive tab completion is already enabled."
+fi
+
+### 2. Set Faster Keyboard Repeat Rate
+if ! grep -q "xset r rate" "$HOME/.bashrc"; then
+    echo -e "\n# Set faster keyboard repeat rate" >> "$HOME/.bashrc"
+    echo "xset r rate 200 50" >> "$HOME/.bashrc"
+    echo "Keyboard repeat rate set to 200ms delay, 50 repeats/sec."
+else
+    echo "Keyboard repeat rate is already configured."
 fi
 
 # Apply changes
