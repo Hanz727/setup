@@ -48,12 +48,30 @@ sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt update
 sudo apt install -y neovim
 
-# Install neovim config
-git clone https://github.com/Hanz727/nvim-cfg.git ~/.config/nvim
+# Ensure the directory exists before cloning
+NVIM_CONFIG_PATH="$HOME/.config/nvim"
 
-# Install packer
-git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+if [ ! -d "$NVIM_CONFIG_PATH" ]; then
+  echo "Installing Neovim config..."
+  git clone https://github.com/Hanz727/nvim-cfg.git "$NVIM_CONFIG_PATH" || {
+    echo "Failed to clone Neovim config" >&2
+    exit 1
+  }
+else
+  echo "Neovim config is already installed."
+fi
+
+# Ensure the directory exists before cloning
+PACKER_PATH="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
+if [ ! -d "$PACKER_PATH" ]; then
+  echo "Installing packer.nvim..."
+  git clone --depth 1 https://github.com/wbthomason/packer.nvim "$PACKER_PATH" || {
+    echo "Failed to clone packer.nvim" >&2
+    exit 1
+  }
+else
+  echo "packer.nvim is already installed."
+fi
 
 ### 1. Enable Case-Insensitive Tab Completion for `cd`
 INPUTRC="$HOME/.inputrc"
