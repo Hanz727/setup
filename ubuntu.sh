@@ -93,7 +93,7 @@ else
     echo "Keyboard repeat rate is already configured."
 fi
 
-TMUX_CONF="$HOME/tmux.conf"
+TMUX_CONF="$HOME/.tmux.conf"
 
 # Check if the tmux.conf file exists
 if [ ! -f "$TMUX_CONF" ]; then
@@ -115,9 +115,9 @@ bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -in -selection c
 
 bind r source-file ~/.tmux.conf \; display-message "tmux.conf reloaded"
 EOL
-  echo "tmux.conf created at $TMUX_CONF"
+  echo ".tmux.conf created at $TMUX_CONF"
 else
-  echo "tmux.conf already exists at $TMUX_CONF"
+  echo ".tmux.conf already exists at $TMUX_CONF"
 fi
 
 # Apply changes
