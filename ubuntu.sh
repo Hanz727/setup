@@ -54,3 +54,17 @@ git clone https://github.com/Hanz727/nvim-cfg.git ~/.config/nvim
 # Install packer
 git clone --depth 1 https://github.com/wbthomason/packer.nvim \
   ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+CD_CONFIG="set completion-ignore-case on\nset show-all-if-ambiguous on"
+
+# Check if the settings already exist in ~/.inputrc
+if ! grep -q "completion-ignore-case" ~/.inputrc 2>/dev/null; then
+    echo -e "\n# Enable case-insensitive tab completion" >> ~/.inputrc
+    echo -e "$CD_CONFIG" >> ~/.inputrc
+    echo "Updated ~/.inputrc to enable case-insensitive cd tab completion."
+else
+    echo "Case-insensitive tab completion is already enabled."
+fi
+
+# Apply changes
+exec bash
