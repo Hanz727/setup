@@ -113,6 +113,11 @@ set-window-option -g mode-keys vi
 bind -T copy-mode-vi v send-keys -X begin-selection
 bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -in -selection clipboard'
 
+bind -r h select-pane -L
+bind -r j select-pane -D
+bind -r k select-pane -U
+bind -r l select-pane -R
+
 bind r source-file ~/.tmux.conf \; display-message "tmux.conf reloaded"
 EOL
   echo ".tmux.conf created at $TMUX_CONF"
