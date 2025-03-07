@@ -98,7 +98,11 @@ if command -v tmux &>/dev/null; then
   # Create or update tmux.conf if it doesn't exist
   TMUX_CONF=~/.tmux.conf
   if [ ! -f "$TMUX_CONF" ]; then
-    cat <<EOL > "$TMUX_CONF"
+    touch "$TMUX_CONF"
+  fi
+
+  # Append the tmux configuration only if it's not already there
+  grep -qxF 'set -g default-terminal "tmux-256color"' "$TMUX_CONF" || cat <<EOL >> "$TMUX_CONF"
 set -g default-terminal "tmux-256color"
 set -s escape-time 0
 set -g base-index 1
@@ -115,8 +119,8 @@ bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -in -selection c
 
 bind r source-file ~/.tmux.conf \; display-message "tmux.conf reloaded"
 EOL
-  fi
 fi
+
 
 
 # Apply changes
