@@ -93,16 +93,14 @@ else
     echo "Keyboard repeat rate is already configured."
 fi
 
-# Check if tmux is installed
-if command -v tmux &>/dev/null; then
-  # Create or update tmux.conf if it doesn't exist
-  TMUX_CONF=~/.tmux.conf
-  if [ ! -f "$TMUX_CONF" ]; then
-    touch "$TMUX_CONF"
-  fi
+#!/bin/bash
 
-  # Append the tmux configuration only if it's not already there
-  grep -qxF 'set -g default-terminal "tmux-256color"' "$TMUX_CONF" || cat <<EOL >> "$TMUX_CONF"
+TMUX_CONF="$HOME/tmux.conf"
+
+# Check if the tmux.conf file exists
+if [ ! -f "$TMUX_CONF" ]; then
+  # Create the tmux.conf file and write the settings to it
+  cat > "$TMUX_CONF" <<EOL
 set -g default-terminal "tmux-256color"
 set -s escape-time 0
 set -g base-index 1
@@ -112,14 +110,18 @@ unbind C-b
 set-option -g prefix C-a
 bind-key C-a send-prefix
 
-# vi key movement for copy/pasta mode
+# vi key movement for copy/paste mode
 set-window-option -g mode-keys vi
 bind -T copy-mode-vi v send-keys -X begin-selection
 bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -in -selection clipboard'
 
 bind r source-file ~/.tmux.conf \; display-message "tmux.conf reloaded"
 EOL
+  echo "tmux.conf created at $TMUX_CONF"
+else
+  echo "tmux.conf already exists at $TMUX_CONF"
 fi
+
 
 
 
