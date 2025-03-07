@@ -40,7 +40,8 @@ sudo apt update && sudo apt upgrade -y && sudo apt install -y \
     libyaml-dev \
     clang-format \
     clang-tidy \
-    arduino
+    arduino \
+    xsel
 
 # Get nvim latest version
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
