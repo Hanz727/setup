@@ -93,8 +93,6 @@ else
     echo "Keyboard repeat rate is already configured."
 fi
 
-#!/bin/bash
-
 TMUX_CONF="$HOME/tmux.conf"
 
 # Check if the tmux.conf file exists
@@ -121,9 +119,6 @@ EOL
 else
   echo "tmux.conf already exists at $TMUX_CONF"
 fi
-
-
-
 
 # Apply changes
 exec bash
