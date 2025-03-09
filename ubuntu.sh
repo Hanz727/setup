@@ -132,3 +132,5 @@ fi
 
 # Apply changes
 exec bash
+
+gh auth login
