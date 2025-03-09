@@ -43,7 +43,8 @@ sudo apt update && sudo apt upgrade -y && sudo apt install -y \
     arduino \
     xsel \
     meson \
-    ninja-build
+    ninja-build \
+    gh
 
 sudo npm install -g pyright
 
