@@ -41,7 +41,11 @@ sudo apt update && sudo apt upgrade -y && sudo apt install -y \
     clang-format \
     clang-tidy \
     arduino \
-    xsel
+    xsel \
+    meson \
+    ninja-build
+
+sudo npm install -g pyright
 
 # Get nvim latest version
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
