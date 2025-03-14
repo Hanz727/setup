@@ -78,6 +78,20 @@ else
   echo "packer.nvim is already installed."
 fi
 
+SOURCE_DIR="$(dirname "$(realpath "$0")")"
+
+# Make sure the source file exists
+if [ -f "$SOURCE_DIR/Arduino.h" ]; then
+  # Create the destination directory if it doesn't exist
+  sudo mkdir -p /usr/share/farduino
+
+  # Copy the file with sudo to the destination
+  sudo cp -r "$SOURCE_DIR/Arduino.h" /usr/share/farduino
+else
+  echo "Source file $SOURCE_DIR/Arduino.h does not exist!"
+  exit 1
+fi
+
 ### 1. Enable Case-Insensitive Tab Completion for `cd`
 INPUTRC="$HOME/.inputrc"
 if ! grep -q "completion-ignore-case" "$INPUTRC" 2>/dev/null; then
